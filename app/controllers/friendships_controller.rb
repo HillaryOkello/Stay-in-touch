@@ -1,5 +1,4 @@
 class FriendshipsController < ApplicationController
-
   def new
     @friendship = Friendship.new
   end
@@ -15,7 +14,6 @@ class FriendshipsController < ApplicationController
   end
 
   def update
-    debugger
     @friendship = Friendship.find_by(user_id: params[:user_id], friend_id: params[:friend_id])
     @friendship.status = !@friendship.status
     if @friendship.save
