@@ -15,7 +15,7 @@ class FriendshipsController < ApplicationController
 
   def update
     @friendship = Friendship.find_by(user_id: params[:user_id], friend_id: params[:friend_id])
-    @friendship.status = !@friendship.status
+    @friendship.confirmed = !@friendship.confirmed
     if @friendship.save
       redirect_to current_user, notice: 'Invitation accepted'
     else

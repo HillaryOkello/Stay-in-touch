@@ -4,6 +4,12 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  resources :friendships
+
+  post '/friendships/:id', to: 'friendships#create'
+  put '/friendships/:id', to: 'friendships#update'
+  delete '/friendships/:id', to: 'friendships#destroy'
+
   resources :users, only: [:index, :show]
   resources :posts, only: [:index, :create] do
     resources :comments, only: [:create]
