@@ -4,4 +4,9 @@ class Friendship < ApplicationRecord
 
   scope :friends, -> { where('confirmed =?', true) }
   scope :not_friends, -> { where('confirmed =?', false) }
+
+  def confirm_friend
+    update_attributes(status: true)
+    Friendship.create!(friend_id: user_id, user_id: friend_id, status: true)
+  end
 end

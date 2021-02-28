@@ -15,7 +15,7 @@ RSpec.describe Friendship, type: :model do
   end
 
   it 'can create a friendship through user' do
-    new_friendship = user.friendships.build(friend: friend)
+    new_friendship = user.pending_friendships.build(user: user, friend: friend)
     expect(new_friendship.valid?).to be true
   end
 end

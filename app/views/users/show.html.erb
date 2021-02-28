@@ -1,5 +1,12 @@
 <section class="user-section">
   <h2><%= "Name: #{@user.name}" %></h2>
+  <% unless current_user.friend_or_pending?(@user) || current_user == @user %>
+    <%= form_for(@user.friends.new, url: friendship_path(@user)) do |form| %>
+      <%= form.text_field :user_id, id: :user_id, class: 'form-control d-none', value: current_user.id %>
+      <%= form.text_field :friend_id, id: :user_id, class: 'form-control d-none', value: @user.id %>
+      <%= form.submit 'Invite Friend' %>
+    <%end%>
+  <% end %>
   <article class="timeline">
     <h3>Recent posts:</h3>
     <ul class="posts">
