@@ -1,9 +1,49 @@
 <section class="user-section">
   <h2><%= "Name: #{@user.name}" %></h2>
+  <% unless current_user.friend_or_pending?(@user) || current_user == @user %>
+    <%= form_for(@user.friends.new, url: friendship_path(@user)) do |form| %>
+      <%= form.text_field :user_id, id: :user_id, class: 'form-control d-none', value: current_user.id %>
+      <%= form.text_field :friend_id, id: :user_id, class: 'form-control d-none', value: @user.id %>
+      <%= form.submit 'Invite Friend' %>
+    <%end%>
+  <% end %>
   <article class="timeline">
     <h3>Recent posts:</h3>
     <ul class="posts">
       <%= render @posts %>
     </ul>
+
+    <h3> All friends: </h3>
+    <ul>
+      <% @friends.each do |friend| %>
+          <li>
+            <%= friend.name %>
+          </li>
+      <%end%>
+    </ul>
+
+    <% if @pending_friends.size > 0%>
+      <h3> Pending requests: </h3>
+      <ul>
+        <% @pending_friends.each do |friend| %>
+          <li>
+            <%= friend.name %>
+          </li>
+        <%end%>
+      </ul>
+    <%end%>
+
+    <% if @friend_requests.size > 0%>
+      <h3> Friend requests: </h3>
+      <ul>
+        <% @friend_requests.each do |friend| %>
+          <li class = "accept_reject_friendship">
+          <h4><%= friend.name %></h4>
+          <%= accept_friendship_btn(friend)%>
+          <%= reject_friendship_btn(friend)%>
+          </li>
+        <%end%>
+      </ul>
+    <%end%>
   </article>
 </section>

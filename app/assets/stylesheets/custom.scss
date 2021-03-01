@@ -35,6 +35,10 @@ a {
   color: $primary-color-text;
 }
 
+.d-none {
+  display: none;
+}
+
 .nav {
   display: flex;
   justify-content: space-between;
