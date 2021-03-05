@@ -17,7 +17,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: postgres
+  username: hillaryokello
   password: kiswahili
   # url: postgresql://localhost:5432/postgres
 
